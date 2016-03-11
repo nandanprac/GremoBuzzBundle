@@ -16,8 +16,14 @@
         "symfony/dependency-injection": "~2.0",
         "symfony/http-kernel": "~2.0",
         "symfony/config": "~2.0",
-        "kriswallsmith/buzz": ">= 0.6,<1.0"
+        "practo/buzz": "0.16"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/practo/Buzz.git"
+        }
+     ],
     "autoload": {
         "psr-0": {
             "Gremo\\BuzzBundle": ""
