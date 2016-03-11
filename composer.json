@@ -1,5 +1,5 @@
 {
-    "name": "gremo/buzz-bundle",
+    "name": "practo/buzz-bundle",
     "type": "symfony-bundle",
     "description": "Symfony 2 Bundle for using the lightweight Buzz HTTP client.",
     "keywords": ["buzz", "http client"],
