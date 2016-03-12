@@ -16,7 +16,7 @@
         "symfony/dependency-injection": "~2.0",
         "symfony/http-kernel": "~2.0",
         "symfony/config": "~2.0",
-        "practo/buzz": "0.16"
+        "practo/buzz": "dev-master"
     },
     "repositories": [
         {
