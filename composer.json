@@ -1,9 +1,8 @@
 {
     "name": "practo/buzz-bundle",
     "type": "symfony-bundle",
-    "description": "Symfony 2 Bundle for using the lightweight Buzz HTTP client.",
+    "description": "Symfony Bundle for using the lightweight Buzz HTTP client.",
     "keywords": ["buzz", "http client"],
-    "minimum-stability": "dev",
     "license": "MIT",
     "authors": [
         {
@@ -13,9 +12,9 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "symfony/dependency-injection": "~2.0",
-        "symfony/http-kernel": "~2.0",
-        "symfony/config": "~2.0",
+        "symfony/dependency-injection": "~2.0|~3.0",
+        "symfony/http-kernel": "~2.0|~3.0",
+        "symfony/config": "~2.0|~3.0",
         "practo/buzz": "dev-master"
     },
     "repositories": [
@@ -25,9 +24,6 @@
         }
      ],
     "autoload": {
-        "psr-0": {
-            "Gremo\\BuzzBundle": ""
-        }
-    },
-    "target-dir" : "Gremo/BuzzBundle"
+        "psr-4": { "Gremo\\BuzzBundle\\": "" }
+    }
 }
