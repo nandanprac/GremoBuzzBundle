@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the GremoBuzzBundle package.
+ * This file is part of the buzz-bundle package.
  *
  * (c) Marco Polichetti <gremo1982@gmail.com>
  *
@@ -24,64 +24,61 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('gremo_buzz');
 
-        $notInteger = function ($val) {
-            return !is_int($val) && !(is_string($val) && ctype_digit($val));
-        };
-
-        $notPositive = function ($val) {
-            return $val < 0;
-        };
-
+        /** @noinspection PhpUndefinedMethodInspection */
         $rootNode
             ->children()
                 ->scalarNode('client')
                     ->defaultValue('native')
                     ->beforeNormalization()
-                    ->ifString()
-                        ->then(
-                            function ($v) {
-                                return strtolower($v);
-                            }
-                        )
+                        ->ifString()
+                        ->then(function ($v) {
+                            return strtolower($v);
+                        })
                     ->end()
                     ->validate()
-                    ->ifNotInArray(array('curl', 'multi_curl', 'native'))
+                        ->ifNotInArray(array('curl', 'multi_curl', 'native'))
                         ->thenInvalid('Unrecognized %s client, should be "curl", "multi_curl" or "native".')
                     ->end()
                     ->validate()
-                    ->ifTrue(
-                        function ($v) {
+                        ->ifTrue(function ($v) {
                             return in_array($v, array('curl', 'multi_curl')) && !function_exists('curl_init');
-                        }
-                    )
-                    ->thenInvalid('You must enable the "curl" extension to use %s client.')
+                        })
+                        ->thenInvalid('You must enable the "curl" extension to use %s client.')
                     ->end()
                 ->end()
                 ->arrayNode('options')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->booleanNode('ignore_errors')->end()
+                        ->booleanNode('ignore_errors')
+                        ->end()
                         ->scalarNode('max_redirects')
                             ->validate()
-                            ->ifTrue($notInteger)
+                                ->ifTrue(function ($v) {
+                                    return !is_int($v) && !(is_string($v) && ctype_digit($v));
+                                })
                                 ->thenInvalid('Value for option "max_redirects" must be an integer.')
                             ->end()
-                            ->validate()
-                            ->ifTrue($notPositive)
-                                ->thenInvalid('Value for option "max_redirects" must be greater or equal to zero.')
-                            ->end()
+                        ->end()
+                        ->scalarNode('proxy')
                         ->end()
                         ->scalarNode('timeout')
                             ->validate()
-                            ->ifTrue($notInteger)
+                                ->ifTrue(function ($v) {
+                                    return !is_int($v) && !(is_string($v) && ctype_digit($v));
+                                })
                                 ->thenInvalid('Value for option "timeout" must be an integer.')
                             ->end()
+                        ->end()
+                        ->scalarNode('verify_host')
                             ->validate()
-                            ->ifTrue($notPositive)
-                                ->thenInvalid('Value for option "timeout" must be greater or equal to zero.')
+                                ->ifTrue(function ($v) {
+                                    return !is_int($v) && !(is_string($v) && ctype_digit($v));
+                                })
+                                ->thenInvalid('Value for option "verify_host" must be an integer.')
                             ->end()
                         ->end()
-                        ->booleanNode('verify_peer')->end()
+                        ->booleanNode('verify_peer')
+                        ->end()
                     ->end()
                 ->end()
             ->end();
