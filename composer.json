@@ -1,5 +1,5 @@
 {
-    "name": "practo/buzz-bundle",
+    "name": "nandanprac/buzz-bundle",
     "type": "symfony-bundle",
     "description": "Symfony Bundle for using the lightweight Buzz HTTP client.",
     "keywords": ["buzz", "http client"],
@@ -20,7 +20,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/practo/Buzz.git"
+            "url": "https://github.com/nandanprac/GremoBuzzBundle.git"
         }
      ],
     "autoload": {
